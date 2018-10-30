@@ -26,20 +26,5 @@ public class DoneState extends States {
 
     @Override
     void update(char c, Calculator calculator) {
-        int mainTotal = calculator.getTotal();
-        int mainN = calculator.getN();
-        char prevOp = calculator.getPreviousOperator();
-        switch (prevOp){
-            case '+':
-                mainTotal = mainTotal + mainN;
-                calculator.setTotal(mainTotal);
-                break;
-                case '-':
-                    mainTotal = mainTotal - mainN;
-                    calculator.setTotal(mainTotal);
-                    break;
-            }
-        System.out.println("your total is " + mainTotal);
-        super.update(c, calculator);
     }
 }

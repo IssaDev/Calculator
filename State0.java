@@ -26,12 +26,10 @@ public class State0 extends States {
             case '9':
                 calculator.setCurrentState(State1.instance(calculator,c));
                 break;
-            case '0':
-            case '+':
-            case '-':
+            default:
                 calculator.setCurrentState(ErrorState.instance(c));
                 break;
         }
-        super.update(c, calculator);
+
     }
 }

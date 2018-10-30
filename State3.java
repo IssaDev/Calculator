@@ -38,6 +38,9 @@ public class State3 extends  States {
                 //calculator.setN(c);
                 calculator.setCurrentState(State3.instance(calculator,c));
                 break;
+            default:
+                calculator.setCurrentState(ErrorState.instance(c));
+                break;
         }
         //super.update(c, calculator);
     }

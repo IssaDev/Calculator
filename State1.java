@@ -36,6 +36,9 @@ public class State1 extends States {
             case ' ':
                 calculator.setCurrentState(DoneState.instance(calculator, c));
                 break;
+            default:
+                calculator.setCurrentState(ErrorState.instance(c));
+                break;
         }
         //super.update(c, calculator);
     }

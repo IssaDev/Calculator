@@ -47,6 +47,10 @@ public class State2 extends States {
             case '-':
                 calculator.setCurrentState(ErrorState.instance(c));
                 break;
+            default:
+                calculator.setCurrentState(ErrorState.instance(c));
+                break;
+
         }
         //super.update(c, calculator);
     }
