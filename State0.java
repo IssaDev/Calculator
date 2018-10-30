@@ -1,9 +1,14 @@
 public class State0 extends States {
-    Calculator mainCal;
+    private static State0 theState0;
 
-    public State0(Calculator calculator, char c) {
-        super(calculator, c);
-        this.mainCal = calculator;
+    private State0() {
+    }
+
+    public  synchronized  static State0 instance(){
+        if(theState0 == null){
+            theState0 = new State0();
+        }
+        return theState0;
     }
 
 
@@ -19,7 +24,12 @@ public class State0 extends States {
             case '7':
             case '8':
             case '9':
-                calculator.setCurrentState(new State1(calculator,c));
+                calculator.setCurrentState(State1.instance(calculator,c));
+                break;
+            case '0':
+            case '+':
+            case '-':
+                calculator.setCurrentState(ErrorState.instance(c));
                 break;
         }
         super.update(c, calculator);

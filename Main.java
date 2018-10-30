@@ -1,9 +1,7 @@
-import java.util.Scanner;
-
-public class Main {
+public class Main {/*
     public static void main(String[] args){
         Calculator calculator = new Calculator();
-        States currentState;
+        //States currentState = State0.instance();
         System.out.println("Enter values to calculate: ");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -15,5 +13,5 @@ public class Main {
         currentState = calculator.getCurrentState();
         currentState.update(' ', calculator);
 
-    }
+    }*/
 }

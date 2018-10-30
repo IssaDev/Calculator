@@ -1,11 +1,15 @@
+import java.util.Scanner;
+
 public class Calculator {
     int n =0;
     int total =0;
     char previousOperator =' ';
     States currentState;
 
+
     public Calculator(){
-       currentState = new State0(this, ' ');
+       //currentState = new State0(this, ' ');
+         currentState = State0.instance();
     }
     int getTotal(){
         return  total;
@@ -37,15 +41,23 @@ public class Calculator {
 
     }
 
-    /*public static void main(String[] args){
+    public void update(char c){
+        currentState.update(c,this);
+    }
+
+    public static void main(String[] args){
+        Calculator calculator = new Calculator();
         System.out.println("Enter values to calculate: ");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         char inputArray[] =input.toCharArray();
         for(int i = 0; i<inputArray.length; i++){
-            currentState.update(inputArray[i], this);
+            calculator.update(inputArray[i]);
         }
+        calculator.update(' ');
 
-    }*/
+    }
+
+
 
 }

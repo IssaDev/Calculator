@@ -1,10 +1,15 @@
 public class State1 extends States {
-    Calculator mainCal;
-    public State1(Calculator calculator, char c) {
-        super(calculator, c);
-        mainCal = calculator;
+    private static State1 theState1;
+    private State1() {
+    }
+
+    public synchronized static State1 instance(Calculator calculator, char c){
+        if (theState1== null){
+            theState1 = new State1();
+        }
         int n = Character.getNumericValue(c);
-        mainCal.setN(n);
+        calculator.setN(n);
+        return theState1;
     }
 
     @Override
@@ -21,15 +26,15 @@ public class State1 extends States {
             case '9':
             case '0':
                 //calculator.setN(c);
-                calculator.setCurrentState(new State3(calculator,c));
+                calculator.setCurrentState(State3.instance(calculator,c));
                 break;
 
             case '+':
             case '-':
-                calculator.setCurrentState(new State2(calculator,c));
+                calculator.setCurrentState(State2.instance(calculator,c));
                 break;
             case ' ':
-                calculator.setCurrentState(new DoneState(calculator, c));
+                calculator.setCurrentState(DoneState.instance(calculator, c));
                 break;
         }
         //super.update(c, calculator);

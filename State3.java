@@ -1,13 +1,18 @@
 public class State3 extends  States {
-    Calculator mainCal;
+    private static State3 theState3;
 
-    public State3(Calculator calculator, char c) {
-        super(calculator, c);
-        this.mainCal = calculator;
+    private State3() {
+    }
+
+    public synchronized static State3 instance(Calculator calculator, char c){
+        if(theState3 == null){
+            theState3 = new State3();
+        }
         int n = Character.getNumericValue(c);
-        int mainN = mainCal.getN();
+        int mainN = calculator.getN();
         mainN = mainN *10 + n;
-        mainCal.setN(mainN);
+        calculator.setN(mainN);
+        return theState3;
     }
 
     @Override
@@ -15,10 +20,10 @@ public class State3 extends  States {
         switch (c){
             case '+':
             case '-':
-                calculator.setCurrentState(new State2(calculator,c));
+                calculator.setCurrentState(State2.instance(calculator,c));
                 break;
             case ' ':
-                calculator.setCurrentState(new DoneState(calculator, c));
+                calculator.setCurrentState(DoneState.instance(calculator, c));
                 break;
             case '1':
             case '2':
@@ -31,7 +36,7 @@ public class State3 extends  States {
             case '9':
             case '0':
                 //calculator.setN(c);
-                calculator.setCurrentState(new State3(calculator,c));
+                calculator.setCurrentState(State3.instance(calculator,c));
                 break;
         }
         //super.update(c, calculator);

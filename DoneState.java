@@ -1,8 +1,12 @@
 public class DoneState extends States {
-    Calculator mainCal;
+    private static DoneState weDone;
 
-    public DoneState(Calculator calculator, char c) {
-        super(calculator, c);
+    private DoneState() {
+    }
+    public synchronized static DoneState instance(Calculator calculator, char c){
+        if (weDone== null){
+            weDone = new DoneState();
+        }
         int mainTotal = calculator.getTotal();
         int mainN = calculator.getN();
         char prevOp = calculator.getPreviousOperator();
@@ -11,13 +15,13 @@ public class DoneState extends States {
                 mainTotal = mainTotal + mainN;
                 calculator.setTotal(mainTotal);
                 break;
-            case '-':
-                mainTotal = mainTotal - mainN;
-                calculator.setTotal(mainTotal);
-                break;
-        }
+                case '-':
+                    mainTotal = mainTotal - mainN;
+                    calculator.setTotal(mainTotal);
+                    break;
+            }
         System.out.println("your total is " + mainTotal);
-
+        return weDone;
     }
 
     @Override

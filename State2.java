@@ -1,29 +1,32 @@
 public class State2 extends States {
-    Calculator mainCal;
+    private static State2 theState2;
 
-    public State2(Calculator calculator, char c) {
-        super(calculator, c);
-        this.mainCal = calculator;
-        int mainTotal = mainCal.getTotal();
-        int mainN = mainCal.getN();
+    private State2() {
+    }
+    public synchronized static State2 instance(Calculator calculator, char c){
+        if (theState2== null){
+            theState2 = new State2();
+        }
+        int mainTotal = calculator.getTotal();
+        int mainN = calculator.getN();
         if(mainTotal == 0){
-            mainCal.setTotal(mainN);
+            calculator.setTotal(mainN);
         }
         else {
-            char prevOp = mainCal.getPreviousOperator();
+            char prevOp = calculator.getPreviousOperator();
             switch (prevOp){
                 case '+':
                     mainTotal = mainTotal + mainN;
-                    mainCal.setTotal(mainTotal);
+                    calculator.setTotal(mainTotal);
                     break;
                 case '-':
                     mainTotal = mainTotal - mainN;
-                    mainCal.setTotal(mainTotal);
+                    calculator.setTotal(mainTotal);
                     break;
             }
         }
-        mainCal.setPreviousOperator(c);
-
+        calculator.setPreviousOperator(c);
+        return theState2;
     }
     @Override
     void update(char c, Calculator calculator) {
@@ -37,7 +40,12 @@ public class State2 extends States {
             case '7':
             case '8':
             case '9':
-                calculator.setCurrentState(new State1(calculator,c));
+                calculator.setCurrentState(State1.instance(calculator,c));
+                break;
+            case '0':
+            case '+':
+            case '-':
+                calculator.setCurrentState(ErrorState.instance(c));
                 break;
         }
         //super.update(c, calculator);
