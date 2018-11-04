@@ -34,12 +34,16 @@ public class State1 extends States {
                 calculator.setCurrentState(State2.instance(calculator,c));
                 break;
             case ' ':
-                calculator.setCurrentState(DoneState.instance(calculator, c));
+                if(calculator.getErrorFlag() == true){
+                    calculator.setCurrentState(ErrorState.instance(c));
+                }
+                else {
+                    calculator.setCurrentState(DoneState.instance(calculator, c));
+                }
                 break;
             default:
                 calculator.setCurrentState(ErrorState.instance(c));
                 break;
         }
-        //super.update(c, calculator);
     }
 }

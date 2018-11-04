@@ -15,11 +15,11 @@ public class DoneState extends States {
                 mainTotal = mainTotal + mainN;
                 calculator.setTotal(mainTotal);
                 break;
-                case '-':
-                    mainTotal = mainTotal - mainN;
-                    calculator.setTotal(mainTotal);
-                    break;
-            }
+            case '-':
+                mainTotal = mainTotal - mainN;
+                calculator.setTotal(mainTotal);
+                break;
+        }
         System.out.println("your total is " + mainTotal);
         return weDone;
     }

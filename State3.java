@@ -23,7 +23,12 @@ public class State3 extends  States {
                 calculator.setCurrentState(State2.instance(calculator,c));
                 break;
             case ' ':
-                calculator.setCurrentState(DoneState.instance(calculator, c));
+                if(calculator.getErrorFlag() == true){
+                    calculator.setCurrentState(ErrorState.instance(c));
+                }
+                else {
+                    calculator.setCurrentState(DoneState.instance(calculator, c));
+                }
                 break;
             case '1':
             case '2':

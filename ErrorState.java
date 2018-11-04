@@ -7,7 +7,13 @@ public class ErrorState extends States {
         if(error == null){
             error = new ErrorState();
         }
-        System.out.println("Error has occurred, unexpected " + c + " found");
+        if(c == ' '){
+            System.out.println("Error has occurred, character can't be a space");
+        }
+        else{
+            System.out.println("Error has occurred, unexpected " + c + " found");
+        }
+
         return error;
     }
 

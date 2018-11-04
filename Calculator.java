@@ -1,15 +1,14 @@
 import java.util.Scanner;
-
 public class Calculator {
     int n =0;
     int total =0;
     char previousOperator =' ';
+    boolean errorFlag = false;
     States currentState;
 
 
     public Calculator(){
-       //currentState = new State0(this, ' ');
-         currentState = State0.instance();
+        currentState = State0.instance();
     }
     int getTotal(){
         return  total;
@@ -38,7 +37,12 @@ public class Calculator {
     }
     public States getCurrentState(){
         return currentState;
-
+    }
+    public boolean getErrorFlag(){
+        return errorFlag;
+    }
+    public void setErrorFlag(){
+        errorFlag = true;
     }
 
     public void update(char c){
@@ -52,8 +56,12 @@ public class Calculator {
         String input = sc.nextLine();
         char inputArray[] =input.toCharArray();
         for(int i = 0; i<inputArray.length; i++){
+            if(inputArray[i] == ' '){
+                calculator.setErrorFlag();
+            }
             calculator.update(inputArray[i]);
         }
+
         calculator.update(' ');
 
     }
